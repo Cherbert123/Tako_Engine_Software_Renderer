@@ -8,11 +8,13 @@ public class QuaternionTestRunner {
 	}
 	public void run() 
 	{
-		Quaternion q1 = new Quaternion(1,1,2,1);
+		Quaternion q1 = new Quaternion(0,0,0,0);
 		Quaternion q2 = new Quaternion(1,1,1,1);
-		System.out.println(Quaternion.multiply(q1, q2).q0);
-		System.out.println(Quaternion.multiply(q1, q2).q1);
-		System.out.println(Quaternion.multiply(q1, q2).q2);
-		System.out.println(Quaternion.multiply(q1, q2).q3);
+		
+		
+		
+		q1.normalize();
+		System.out.println(q1.length());
+		System.out.println(q1.q3 + q1.q2 + q1.q1 + q1.q0);
 	}
 }
