@@ -14,6 +14,8 @@ public class Runner {
 		display.clearBackBuffer(0, 0, 0, 1);
 		display.renderTriangle(new Vector2(0f, 1f), new Vector2(-1f, 0.5f), new Vector2(1f, 1f), new Vector4(255f, 0, 0, 255f));		
 		display.swapBuffers();
+		display.renderTransformedTriangle(new Matrix4(),new Vector2(0f, 1f), new Vector2(-1f, 0.5f), new Vector2(1f, 1f), new Vector4(255f, 0, 0, 255f));
+		display.swapBuffers();
 	}
 	
 	public static void main(String[] args) {

@@ -86,4 +86,15 @@ public class Matrix4 {
 			}
 		}
 	}
+	
+	public static Vector4 MultiplyMat4Vec4(Matrix4 mat4, Vector4 vec4)
+	{
+		Vector4 r = vec4;
+		r.x = (r.x * mat4.matrix[0][0]) + (r.x * mat4.matrix[0][1]) + (r.x * mat4.matrix[0][2]) + (r.x * mat4.matrix[0][3]);
+		r.y = (r.y * mat4.matrix[1][0]) + (r.y * mat4.matrix[1][1]) + (r.y * mat4.matrix[1][2]) + (r.x * mat4.matrix[1][3]);
+		r.z = (r.z * mat4.matrix[2][0]) + (r.z * mat4.matrix[2][1]) + (r.z * mat4.matrix[2][2]) + (r.x * mat4.matrix[2][3]);
+		r.w = (r.w * mat4.matrix[3][0]) + (r.w * mat4.matrix[3][1]) + (r.w * mat4.matrix[3][2]) + (r.x * mat4.matrix[3][3]);
+		return r;
+		
+	}
 }

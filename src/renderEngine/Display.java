@@ -163,8 +163,6 @@ public class Display {
 				endXs[i] = (int) v3.x;
 			}
 		}
-		System.out.println(startXs[0]);
-		System.out.println(endXs[0]);
 		int ctr = 0;
 		for (int y = (int) v3.y; y < v2.y; y++) {
 			if(ctr<startXs.length || ctr<endXs.length) {
@@ -295,5 +293,21 @@ public class Display {
 		display.setIcon(new ImageIcon(imageBuffer));
 		frame.pack();
 	}
+	
+	public void renderTransformedTriangle(Matrix4 mat4, Vector2 vec1, Vector2 vec2, Vector2 vec3, Vector4 color) 
+	{
+		Vector4 vec1Four = new Vector4(vec1.x,vec1.y,0f,1f);
+		Vector4 vec2Four = new Vector4(vec2.x,vec2.y,0f,1f);
+		Vector4 vec3Four = new Vector4(vec3.x,vec3.y,0f,1f);
+		vec1Four = Matrix4.MultiplyMat4Vec4(mat4, vec1Four);
+		vec2Four = Matrix4.MultiplyMat4Vec4(mat4, vec2Four);
+		vec3Four = Matrix4.MultiplyMat4Vec4(mat4, vec3Four);
+		Vector2 vec1Con = new Vector2(vec1Four.x,vec1Four.y);
+		Vector2 vec2Con = new Vector2(vec2Four.x,vec2Four.y);
+		Vector2 vec3Con = new Vector2(vec3Four.x,vec3Four.y);
+		
+		renderTriangle(vec1Con,vec2Con,vec3Con, color);
+	}
+	
 	
 }
