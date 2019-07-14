@@ -7,16 +7,15 @@ public class Quaternion {
 	public float q2;
 	public float q3;
 	
-	//Build Quaternion
+	// NOTE (Charlie): Builds a Quaternion from inputed values
 	public Quaternion(float x, float y, float z, float w)
 	{
-		//Sets 'q' values to values recieved when a Quaternion is created
 		this.q0 = x; this.q1 = y; this.q2 = z; this.q3 = w;
 	}
 	
 	public static Quaternion multiply(Quaternion q1, Quaternion q2)
 	{
-		// Multiply q1's 'q' variables by q2's 'q' variables (Do not touch please!)
+		//NOTE (Charlie): Multiply q1's 'q' variables by q2's 'q' variables (Do not touch please!)
 		float w = q1.q3 * q2.q3 - q1.q0 * q2.q0 - q1.q1 * q2.q1 - q1.q2 * q2.q2;
 		float x = q1.q3 * q2.q0 + q1.q0 * q2.q3 + q1.q1 * q2.q2 - q1.q2 * q2.q1;
 		float y = q1.q3 * q2.q1 - q1.q0 * q2.q2 + q1.q1 * q2.q3 + q1.q2 * q2.q0;
@@ -31,7 +30,7 @@ public class Quaternion {
 		
 	}
 	
-	
+	//NOTE (Charlie): Adds 'q' variables together from 2 Quaternions
 	public static Quaternion add(Quaternion q1, Quaternion q2)
 	{
 		return new Quaternion(q1.q0 + q2.q0,q1.q1 + q2.q1,q1.q2 + q2.q2,q1.q3 + q2.q3);
@@ -40,6 +39,7 @@ public class Quaternion {
         return add(this, q1);
     }
 	
+	//NOTE (Charlie): Subtracts 'q' variables from 2 Quaternions from each other 
 	public static Quaternion subtract(Quaternion q1, Quaternion q2)
 	{
 		return new Quaternion(q1.q0 - q2.q0,q1.q1 - q2.q1,q1.q2 - q2.q2,q1.q3 - q2.q3);
@@ -47,6 +47,8 @@ public class Quaternion {
 	public Quaternion subtract(Quaternion q1) {
         return subtract(this, q1);
     }
+	
+	//NOTE (Charlie): clones passed Quaternion's values to current Quaternion
 	public void clone(Quaternion q1)
 	{
 		this.q0 = q1.q0;
@@ -55,7 +57,8 @@ public class Quaternion {
 		this.q3 = q1.q3;
 	}
 	
-	static Quaternion rotationToQuaternion(Vector3 axis, float angle) 
+	//NOTE (Charlie): converts a rotation to a Quaternion
+	public static Quaternion rotationToQuaternion(Vector3 axis, float angle) 
 	{
 		float hang = angle/2;
 		Quaternion q1 = new Quaternion(axis.x * (float)Math.sin(hang),axis.y * (float)Math.sin(hang),axis.z * (float)Math.sin(hang),(float)Math.cos(hang));
@@ -63,6 +66,7 @@ public class Quaternion {
 		return q1; 
 	}
 	
+	//NOTE (Charlie): rotates a quaternion around (Vector 3 axis) for (float angle) degrees
 	public void rotate(Vector3 axis, float angle)
 	{
 		Quaternion q1 = rotationToQuaternion(axis, angle);
@@ -70,6 +74,7 @@ public class Quaternion {
 		
 	}
 	
+	//NOTE (Charlie): converts current Quaternion to a Matrix4
 	public Matrix4 toMatrix()
 	{
 		Matrix4 m4 = new Matrix4();
@@ -100,6 +105,7 @@ public class Quaternion {
 		return (float)Math.sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 *q3);
 	}
 	
+	//NOTE (Charlie): normalizes a Quaternion's length
 	public void normalize()
 	{
 		float length = length();

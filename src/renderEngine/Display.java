@@ -132,6 +132,14 @@ public class Display {
 		}
 	}
 	
+	public void renderTriangle(Matrix4 transform) 
+	{
+		
+		
+	}
+	
+	
+	
 	public void renderFlatTopTriangle(Vector2 t1, Vector2 t2, Vector2 b, Vector4 color) {
 		Vector2 v1 = t1;
 		Vector2 v2 = t2;

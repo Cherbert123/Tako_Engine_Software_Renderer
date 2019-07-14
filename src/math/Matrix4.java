@@ -20,6 +20,23 @@ public class Matrix4 {
 			}
 		}
 	}
+	public Matrix4(float value) {
+		matrix = new float[4][4];
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				if(i == j) 
+				{
+					matrix[i][j] = value;
+				} 
+				else 
+				{
+				matrix[i][j] = 0;
+				}
+			}
+		}
+	}
+	
+	
 
 	public static Matrix4 multiply(Matrix4 mat1, Matrix4 mat2) {
 		Matrix4 m = new Matrix4();
