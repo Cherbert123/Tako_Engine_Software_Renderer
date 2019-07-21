@@ -28,6 +28,11 @@ public class Vector3 {
 		return new Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
 	}
 	
+	public float length()
+	{
+		return (float)Math.sqrt(x * x + y * y + z * z);
+	}
+	
 	public void add(Vector3 v) {
 		x+=v.x;
 		y+=v.y;
@@ -47,6 +52,11 @@ public class Vector3 {
 		x/=v.x;
 		y/=v.y;
 		z/=v.z;
+	}
+	public void normalize(Vector3 v) 
+	{
+	
+		
 	}
 	
 	

@@ -60,6 +60,7 @@ public class Quaternion {
 	//NOTE (Charlie): converts a rotation to a Quaternion
 	public static Quaternion rotationToQuaternion(Vector3 axis, float angle) 
 	{
+	   
 		float hang = angle/2;
 		Quaternion q1 = new Quaternion(axis.x * (float)Math.sin(hang),axis.y * (float)Math.sin(hang),axis.z * (float)Math.sin(hang),(float)Math.cos(hang));
 		q1.normalize(); 
