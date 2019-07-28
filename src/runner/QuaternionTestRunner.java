@@ -17,6 +17,6 @@ public class QuaternionTestRunner {
 		
 		q1.normalize();
 		System.out.println(q1.length());
-		System.out.println(q1.q3 + q1.q2 + q1.q1 + q1.q0);
+
 	}
 }

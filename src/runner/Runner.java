@@ -21,16 +21,19 @@ public class Runner {
 		//display.renderTransformedTriangle(mat4Up,new Vector2(.5f, 0f), new Vector2(-.5f, 0f), new Vector2(0f, .5f), new Vector4(255f, 0, 0, 255f));
 
 		//display.swapBuffers();
-		//while(true) {
+		float r =0;
+	while(true) {
 		//for (int i = 1; i < 360; i++) {
 			display.clearBackBuffer(0, 0, 0, 1);
-			Quaternion q = Quaternion.rotationToQuaternion(new Vector3(0,0,0), (float)Math.PI / 45f);
+			Quaternion q = Quaternion.rotationToQuaternion(new Vector3(0,0,1), r);
+			r+= 0.1f;
 			mat4Up = q.toMatrix();
+	
 		
-			display.renderTransformedTriangle(mat4Up,new Vector2(.5f, 0f), new Vector2(-.5f, 0f), new Vector2(0f, .5f), new Vector4(255f, 0, 0, 255f));
+			display.renderTransformedTriangle(mat4Up,new Vector3(.5f, 0f,0f), new Vector3(-.5f, 0f,0f), new Vector3(0f, .5f,0f), new Vector4(255f, 0, 0, 255f));
 
 			display.swapBuffers();
-	//	}
+		}
 		
 		
 	
