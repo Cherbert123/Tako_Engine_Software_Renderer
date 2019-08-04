@@ -53,9 +53,9 @@ public class Vector3 {
 		y/=v.y;
 		z/=v.z;
 	}
-	public void normalize(Vector3 v) 
+	public void normalize() 
 	{
-	
+	 this.x = x/length(); this.y = y/length(); this.z = z/length();
 		
 	}
 	

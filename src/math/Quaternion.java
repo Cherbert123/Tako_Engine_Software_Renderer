@@ -60,9 +60,11 @@ public class Quaternion {
 	//NOTE (Charlie): converts a rotation to a Quaternion
 	public static Quaternion rotationToQuaternion(Vector3 axis, float angle) 
 	{
-	   
-		float hang = angle/2;
-		Quaternion q1 = new Quaternion(axis.x * (float)Math.sin(hang),axis.y * (float)Math.sin(hang),axis.z * (float)Math.sin(hang),(float)Math.cos(hang));
+	    axis.normalize();
+	    
+		float hang = angle/2f;
+		float sinHang = (float)Math.sin(hang);
+		Quaternion q1 = new Quaternion(axis.x * sinHang,axis.y * sinHang,axis.z * sinHang,(float)Math.cos(hang));
 		q1.normalize(); 
 		return q1; 
 	}
@@ -80,7 +82,8 @@ public class Quaternion {
 	{
 		this.normalize();
 		Matrix4 m4 = new Matrix4();
-	/*    float sqw = this.w*this.w;
+		//Attempt 2:
+	   /* float sqw = this.w*this.w;
 	    float sqx = this.x*this.x;
 	    float sqy = this.y*this.y;
 	    float sqz = this.z*this.z;
@@ -105,22 +108,40 @@ public class Quaternion {
 	    m4.matrix[1][2] = 2.0f * (tmp1 + tmp2)*invs ;
 	    m4.matrix[2][1] = 2.0f * (tmp1 - tmp2)*invs ;
 	    m4.matrix[3][3] = 1f; */
+		//Attempt 1:
 		m4.matrix[0][0] = (1 - (2*(this.y * this.y)) - (2*(this.z * this.z)));
-		m4.matrix[0][1] = ((2*this.x * this.y) - (2*this.z * this.w));
-		m4.matrix[0][2] = ((2*this.x * this.z) + (2*this.y * this.w));
+		m4.matrix[0][1] = ((2*this.x * this.y) + (2*this.z * this.w));
+		m4.matrix[0][2] = ((2*this.x * this.z) - (2*this.y * this.w));
 		m4.matrix[0][3] = 0;
-		m4.matrix[1][0] = ((2*this.x * this.y) + (2*this.z * this.w));
+		m4.matrix[1][0] = ((2*this.x * this.y) - (2*this.z * this.w));
 		m4.matrix[1][1] = (1 - (2*(this.x * this.x)) - (2*(this.z * this.z)));
-		m4.matrix[1][2] = ((2*this.y * this.z) - (2*this.x * this.w));
+		m4.matrix[1][2] = ((2*this.y * this.z) + (2*this.x * this.w));
 		m4.matrix[1][3] = 0;
-		m4.matrix[2][0] = ((2*this.x * this.z) - (2*this.y * this.w));
-		m4.matrix[2][1] = ((2*this.y * this.z) + (2*this.x * this.w));
+		m4.matrix[2][0] = ((2*this.x * this.z) + (2*this.y * this.w));
+		m4.matrix[2][1] = ((2*this.y * this.z) - (2*this.x * this.w));
 		m4.matrix[2][2] = (1 - (2*(this.x * this.x)) - (2*(this.y * this.y)));
 		m4.matrix[2][3] = 0;
 		m4.matrix[3][0] = 0;
 		m4.matrix[3][1] = 0;
 		m4.matrix[3][2] = 0;
 		m4.matrix[3][3] = 1; 
+		//Attempt 3:
+		/*Matrix4 mat41 = new Matrix4(this.w);
+		Matrix4 mat42 = new Matrix4(this.w);
+		//NOTE (Charlie): Equation from Euclideanspace, mat41 is left side, m42 is right side
+		mat41.matrix[1][0] = this.z; mat42.matrix[1][0] = this.z;
+		mat41.matrix[2][0] = -this.y; mat42.matrix[2][0] = -this.y;
+		mat41.matrix[3][0] = this.x; mat42.matrix[1][0] = -this.x;
+		mat41.matrix[0][1] = -this.z; mat42.matrix[0][1] = -this.z;
+		mat41.matrix[2][1] = this.x; mat42.matrix[2][1] = this.x;
+		mat41.matrix[3][1] = this.y; mat42.matrix[3][1] = -this.y;
+		mat41.matrix[0][2] = this.y; mat42.matrix[0][2] = this.y;
+		mat41.matrix[1][2] = -this.x; mat42.matrix[1][2] = -this.x;
+		mat41.matrix[3][2] = this.z; mat42.matrix[3][2] = -this.z;
+		mat41.matrix[0][3] = -this.x; mat42.matrix[0][3] = this.x;
+		mat41.matrix[1][3] = -this.y; mat42.matrix[0][3] = this.y;
+		mat41.matrix[2][3] = -this.z; mat42.matrix[2][3] = this.z;
+		return Matrix4.multiply(mat41, mat42);*/
 		return m4; 
 	}
 	
@@ -129,7 +150,7 @@ public class Quaternion {
 	
 	public float length()
 	{
-		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
+		return (float)Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
 	}
 	
 	//NOTE (Charlie): normalizes a Quaternion's length

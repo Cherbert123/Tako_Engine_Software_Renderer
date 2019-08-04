@@ -25,11 +25,18 @@ public class Runner {
 	while(true) {
 		//for (int i = 1; i < 360; i++) {
 			display.clearBackBuffer(0, 0, 0, 1);
+			
+			//Good:
 			Quaternion q = Quaternion.rotationToQuaternion(new Vector3(0,0,1), r);
-			r+= 0.1f;
+			r+= 0.01f;
+			if(r >= 360) 
+			{
+				r = 0;
+			}
+			//Bad?:
 			mat4Up = q.toMatrix();
 	
-		
+			//Bad?:
 			display.renderTransformedTriangle(mat4Up,new Vector3(.5f, 0f,0f), new Vector3(-.5f, 0f,0f), new Vector3(0f, .5f,0f), new Vector4(255f, 0, 0, 255f));
 
 			display.swapBuffers();
