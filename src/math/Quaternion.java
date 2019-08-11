@@ -149,7 +149,7 @@ public class Quaternion {
 	
 	public float length()
 	{
-		return (float)Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+		return (float)Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
 	}
 	
 	//NOTE (Charlie): normalizes a Quaternion's length
