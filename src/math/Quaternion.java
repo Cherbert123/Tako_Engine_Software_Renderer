@@ -87,7 +87,6 @@ public class Quaternion {
 	    float sqx = this.x*this.x;
 	    float sqy = this.y*this.y;
 	    float sqz = this.z*this.z;
-
 	    // invs (inverse square length) is only required if quaternion is not already normalised
 	    float invs = 1 / (sqx + sqy + sqz + sqw);
 	    m4.matrix[0][0] = ( sqx - sqy - sqz + sqw)*invs ; // since sqw + sqx + sqy + sqz =1/invs*invs
